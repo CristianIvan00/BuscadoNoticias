@@ -2,7 +2,14 @@
     font-family: monospace;
   }
   
+  
+
   ul {
     list-style: none;
     padding-left: 20px;
   }
+
+  .App{
+  padding-left: 300px;
+  padding-right: 30px;
+}

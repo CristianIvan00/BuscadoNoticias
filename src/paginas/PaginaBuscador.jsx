@@ -10,26 +10,28 @@ import { useSearchParams } from "react-router-dom"
 
 
 const PaginaBuscador = () => {
-    const [Noticias, getNoticias] = useState();
+    const [noticias, setNoticias] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [cantidadPaginas, setCantidadPaginas] = useState(1);
     const [pagina, setPagina] = useState(1);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    useEffect(() => {
-        if(searchParams.get('query')) {
+   useEffect(() => {
+        if (searchParams.get('query')){
             buscarNoticias(pagina)
         }
     }, [searchParams, pagina]);
+
     
     
     const buscarNoticias = async () => {
         setIsLoading(true);
-        const { Search: noticia, totalResults } = await getListadoNoticias(searchParams.get('query'), pagina);
-        getNoticias(noticia);
-        setCantidadPaginas(Math.ceil(parseInt(totalResults)/10))
+        const { results: noti, totalResults } = await getListadoNoticias(searchParams.get('query'), pagina);
+        setNoticias(noti);
+        setCantidadPaginas(Math.ceil(parseInt(totalResults)/10));
         setIsLoading(false);
-    }
+       }
+    
     
 
     const onBuscar =  (criterioBusqueda) => {
@@ -41,13 +43,13 @@ const PaginaBuscador = () => {
     };
 
     return (
-        <Container maxWidth='sm'>
-            <Buscador onBuscar={onBuscar}/>
+        <Container >
+            <Buscador sx={{paddingLeft: '300px'}} onBuscar={onBuscar}/>
             { isLoading && <Loading /> }
-            { Noticias && <ListaNoticias noticias={Noticias}/> }
-            { Noticias && <Paginador cantidadPaginas={cantidadPaginas} onChange={onCambioPagina} /> }
+            { noticias && <ListaNoticias noticias={noticias}/> }
+            { noticias && <Paginador cantidadPaginas={cantidadPaginas} onChange={onCambioPagina} /> }
         </Container>
-    )
+    );
 }
 
 export default PaginaBuscador;

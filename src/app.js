@@ -13,7 +13,7 @@ import Buscador from './components/Buscador/Buscador';
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <PaginaNoticias />,
+        element: <PaginaBuscador />,
         errorElement: <Error404 />,
     },
     {

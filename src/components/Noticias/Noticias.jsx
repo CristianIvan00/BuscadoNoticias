@@ -4,60 +4,64 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import { DEFAULT_IMAGE, NA } from '../../lib/constantes'
-import { useNavigate } from 'react-router-dom'
-
+import { DEFAULT_IMAGE } from '../../lib/constantes';
+import { useNavigate, Link, BrowserRouter } from 'react-router-dom'
+import { DateTime } from 'luxon';
 
 const Noticia = ({
     noticia,
     onChange
 }) => {
     const onCardClick = () => {
-        onChange && onChange(noticia);
-    };
+       onChange && onChange(<a href={noticia.link}></a>) 
+    }
+    
 
-    return(
-        <Card sx={{ with: 250, marginBottom: 10 }}>
-          <CardActionArea onClick={onCardClick}>
-            <CardMedia
-                components="img"
-                height="140"
-                with={250}
-                image={noticia.Poster === NA ? DEFAULT_IMAGE : noticia.Poster}
-                alt={noticia.Title}
-            />
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                    {noticia.Title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {noticia.Plot}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                    {noticia.autor}
-                </Typography>
-            </CardContent>
-          </CardActionArea>  
+    return( 
+        <Card sx={{marginLeft: '5px', width: '700px', marginBottom: 10 }}>
+            <CardActionArea >
+                <CardMedia/>
+                <CardContent >
+                 <a href={noticia.link}></a>
+                    <Typography variant="h5" >
+                        <a href={noticia.link}>
+                            {noticia.title}
+                        </a>  
+                    </Typography>
+                    <Typography variant="h6" margin-left={'0px'} >
+                        {noticia.DEFAULT_IMAGE}   
+                    </Typography>
+                    <Typography variant="h6" margin-left={'0px'} >
+                        {noticia.description}   
+                    </Typography>
+                    <Typography variant="h7" >
+                        {noticia.source_id}
+                        {noticia.DateTime}   
+                    </Typography>
+                </CardContent>
+                
+            </CardActionArea>
+
         </Card>
+
+        
     );
+    
 }
 
 export const ListaNoticias = ({ noticias }) => {
-    const navigate = useNavigate();
-    const onNoticiaClick = ({ imdbID }) => {
-        navigate('/noticias/${imdbID}');
-    }
+    
     return (
     <section style={{
         display: 'flex',
         flexWrap: 'wrap',
         flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginTop: '20px',
+        
+        marginTop: '30px',
       }}>
         {
           noticias.map((noticia) => {
-              return <noticia noticia={noticia} onChange={onNoticiaClick} />
+              return <Noticia noticia={noticia} />
           })
         }
     </section>

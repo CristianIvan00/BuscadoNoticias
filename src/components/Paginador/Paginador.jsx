@@ -1,19 +1,22 @@
-import { Pagination } from "@mui/material"
+import { Pagination, Paper } from "@mui/material"
 
 const Paginador = ({
     cantidadPaginas,
-    onchange
+    onChange
 }) => {
     const cambiarPagina = (_evento, pagina) =>{
-        onchange(pagina);
+        onChange(pagina);
     };
 
     return (
-        <Pagination
-            count={cantidadPaginas}
-            color="secondary"
-            onchange={cambiarPagina}
-        />
+        <Paper sx={{paddingLeft:'300px', maxWidth: '750px',marginTop: '1px', textAlign: 'center'}}>
+            <Pagination 
+                count={cantidadPaginas}
+                color="secondary"
+                onChange={cambiarPagina}
+            />
+        </Paper>
+       
     );
 }
 
