@@ -4,7 +4,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
-import { DEFAULT_IMAGE } from '../../lib/constantes';
 import { useNavigate, Link, BrowserRouter } from 'react-router-dom'
 import { DateTime } from 'luxon';
 
@@ -28,15 +27,17 @@ const Noticia = ({
                             {noticia.title}
                         </a>  
                     </Typography>
-                    <Typography variant="h6" margin-left={'0px'} >
+                    <Typography  margin-left={'0px'} >
                         {noticia.DEFAULT_IMAGE}   
                     </Typography>
                     <Typography variant="h6" margin-left={'0px'} >
                         {noticia.description}   
                     </Typography>
                     <Typography variant="h7" >
-                        {noticia.source_id}
-                        {noticia.DateTime}   
+                        {noticia.source_id}  
+                    </Typography>
+                    <Typography variant="h7" >
+                        {noticia.pubDate}   
                     </Typography>
                 </CardContent>
                 

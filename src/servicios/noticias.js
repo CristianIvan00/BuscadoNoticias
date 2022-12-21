@@ -7,7 +7,7 @@ const NEWS_API = 'https://newsdata.io/api/1/news?';
 export const getListadoNoticias = async (criterioBusqueda, paginaActual) => {
     const respuesta = await fetch(`${NEWS_API}&q=${criterioBusqueda}&apiKey=${API_KEY}&page=${paginaActual}&language=es`);
     const noticias = await respuesta.json();
-    console.log(respuesta)
+    console.log(noticias)
     return noticias;
     
 }
